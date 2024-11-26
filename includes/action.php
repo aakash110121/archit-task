@@ -33,6 +33,10 @@
                 
             require "contact.php";
         }
+        else if ($_POST["action"] == "forgot"){
+                
+            require "forgot.php";
+        }
     }
     else if(isset($_GET["action"]))
     {

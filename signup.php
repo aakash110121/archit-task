@@ -2,7 +2,7 @@
     if(isset($_COOKIE["email"])){
         header("Location:Admin/my-profile.php");
     }
-
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -53,7 +53,7 @@
                 <div class="d-flex flex-row order-2 order-lg-3 user_info">
                     <div class="group_btn d-none d-sm-block">
                         <a href="login.php" class="group_link log_in registration">LOG IN</a>
-                        <a href="signup.php" class="group_link registration ">SIGN UP</a>
+                        <a href="signup.php" class="group_link registration" style="background-image: linear-gradient(135deg, #15cd00 0%, #72e001 100%);">SIGN UP</a>
                     </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navDefault" aria-controls="navDefault" aria-expanded="false" aria-label="Toggle navigation" id="toggleIcon">
                         <span class="bar_one"></span>
@@ -66,7 +66,7 @@
                             <a href="#">
                                     <img src="assets/images/dp.png" alt="dp"><span>
                                         <?php
-                                            session_start();
+ 
                                              if(isset($_COOKIE["email"]))
                                              {
                                                  include "php/php-files/session.php";
@@ -116,6 +116,10 @@
                 </div>
                 <div class="collapse navbar-collapse justify-content-end order-3 order-lg-2" id="navDefault">
                     <ul class="navbar-nav">
+                        <?php
+                            if(isset($_SESSION["user"]))
+                            {
+                        ?>
                         <li class="nav-item">
                             <a class="nav-link" href="index.php" >
                                 HOME
@@ -131,6 +135,9 @@
                         <li class="nav-item">
                             <a class="nav-link pd_right" href="contact.php">CONTACT US</a>
                         </li>
+                        <?php
+                            }
+                        ?>
                         <li class="nav-item d-block d-sm-none"> 
                             <a class="nav-link registration" href="login.php">LOG IN</a>
                         </li>

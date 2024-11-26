@@ -306,28 +306,33 @@
                             if(response.flag=="forgot")
                             {
                                 $("#forgotpass").removeClass("dnone");
+                                $("#forgotpass").click(function(e){
+                                    e.preventDefault();
+                                    if($("#Login-form")[0].checkValidity())
+                                    {
+                                        $.ajax({
+                                            url:"includes/action.php",
+                                            method:"post",
+                                            data:$("#Login-form").serialize()+"&action=forgot",
+                                            dataType:"json",
+                                            success:function(response){
+                                                setTimeout(()=>{
+                                                    window.location.href="forgot.php";
+                                                },2000);      
+                                            }
+                                        });
+                                    }
+                                });
                             }
                         }
                                
                     }
                 });
             });
-            $("#forgotpass").click(function(e){
-                    e.preventDefault();
-                    if($("#Login-form")[0].checkValidity())
-                    {
-                        console.log("inside forgot");
-                        $.ajax({
-                            url:"forgot.php",
-                            method:"post",
-                            data:$("#Login-form").serialize()+"&action=forgot",
-                        });
-                    }
+            $(".alert button").click(function(e){
+                e.preventDefault();
+                $(this).parent().addClass("dnone");
             });
-                $(".alert button").click(function(e){
-                    e.preventDefault();
-                    $(this).parent().addClass("dnone");
-                });
         });
     </script>
 </body>

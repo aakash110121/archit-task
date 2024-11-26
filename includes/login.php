@@ -114,7 +114,7 @@
           }
           else
           {
-                  $msg=["status"=>"failed","msg"=>$db->msg("danger","Password doesnot match")];
+                  $msg=["status"=>"failed","msg"=>$db->msg("danger","Password doesnot match"),"flag"=>"forgot"];
                   $json=json_encode($msg);
                   echo $json;
           }
