@@ -48,115 +48,9 @@
 <body class="dark">
 
 
-      <!--====header navbar start====-->
-    <header> 
-        <nav class="navbar fixed-top navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand" href="index.php">
-                    <img src="assets/images/Logo-dark-n.png" alt="Soccer Spotlight Logo" id="logo">
-                </a>
-                <div class="d-flex flex-row order-2 order-lg-3 user_info">
-                    <div class="group_btn d-none d-sm-block">
-                        <a href="login.php" class="group_link log_in registration" style="background-image: linear-gradient(135deg, #15cd00 0%, #72e001 100%);">LOG IN</a>
-                        <a href="signup.php" class="group_link registration ">SIGN UP</a>
-                    </div>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navDefault" aria-controls="navDefault" aria-expanded="false" aria-label="Toggle navigation" id="toggleIcon">
-                        <span class="bar_one"></span>
-                        <span class="bar_two"></span>
-                        <span class="bar_three"></span>
-                    </button>
-                    <div class="profile">
-                        <div class="avatar">
-                            <div class="avatar-content">
-                                <a href="#">
-                                    <img src="assets/images/dp.png" alt="dp"><span>
-                                        <?php
-                                             if(isset($_SESSION["user"]))
-                                             {
-                                                 include "includes/session.php";
-                                                //  print_r($data);
-                                        ?>
-                                            <?=$data["first_name"]." ".$data["last_name"]?>
-                                        <?php
-                                             }
-                                             else
-                                             {
-                                        ?>
-                                             <?='Guest'?>
-                                        <?php  
-                                             }
-                                        ?>
-                                        </span></a>
-                                    <?php
-                                        if(isset($_COOKIE["email"]))
-                                        {
-                                    ?>
-                                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                                    <?php
-                                        }
-                                    ?>
-                            </div>
-                                    <?php
-                                        if(isset($_COOKIE["email"]))
-                                        {
-                                    ?>
-                                <div class="dropdown">
-                                    <ul>
-                                        <li><a href="my-profile.php"><img src="assets/images/user.svg" alt="user">My Profile</a>
-                                        </li>
-                                        <li>
-                                            <a href="my-matches.html"><img src="assets/images/stadium.svg" alt="stadium">My Matches</a>
-                                        </li>
-                                        <li>
-                                            <a href="http://<?=$server?>/<?=$root?>/Admin/logout.php"><img src="assets/images/logout.svg" alt="logout">log Out</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <?php
-                                    }
-                                ?>
-                        </div>
-                   </div>
-                </div>
-                <div class="collapse navbar-collapse justify-content-end order-3 order-lg-2" id="navDefault">
-                    <ul class="navbar-nav">
-                        <?php
-                            if(isset($_SESSION["user"]))
-                            {
-                        ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php" >
-                                HOME
-                            </a>
+   
 
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.php">ABOUT US</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">HOW TO PLAY</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link pd_right" href="contact.php">CONTACT US</a>
-                        </li>
-                        <?php
-                            }
-                        ?>
-                        <li class="nav-item d-block d-sm-none"> 
-                            <a class="nav-link registration" href="login.php">LOG IN</a>
-                        </li>
-                        <li class="nav-item d-block d-sm-none">
-                            <a class="nav-link registration " href="signup.php">SIGN UP</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <!--====header navbar end====-->
-
-    <!--====login section start====-->
+    <!--====Reset section start====-->
     <section class="form_bg">
         <div class="container">
             <div class="form_container">
@@ -165,7 +59,7 @@
                         <img src="assets/images/logo.png" alt="Spovest Logo">
                     </a>
                 </div>
-                <div id="Login-response">
+                <div id="Reset-response">
                 <?php
                         if(isset($_GET["flag"])&&$_GET["flag"]==1)
                         {    
@@ -175,72 +69,26 @@
                         }
                     ?>                     
                 </div>
-                <form action="#" method="POST" class="mt-60" id="Login-form">
+                <form action="#" method="POST" class="mt-60" id="Pass-Reset">
                
-                    <h1 class="form_title">Log in</h1>
+                    <h1 class="form_title">Reset Password</h1>
+                    <input type="hidden" name="token" value="<?=$_GET['token']?>">
                     <div class="mb-3">
-                        
-                        <input type="email" name="email" placeholder="Email" class="form-control para" id="email" required="required" 
-                       value="<?= isset($_COOKIE['email']) ? $_COOKIE['email'] : ''; ?>">>
+                        <input  name="pass" placeholder="New password" class="form-control para"  required="required">
                     </div>
                     <div class="mb-3">
                         <div class="show_password">
-                            <input type="password" name="password" placeholder="Password" class="form-control para" id="password-field" required="required"
-                            value="<?= isset($_COOKIE['password']) ? $_COOKIE['password'] : ''; ?>">
+                            <input type="password" name="cpass" placeholder="Confirm Password" class="form-control para" id="password-field" required="required">
                             <i class="fas fa-eye toggle-password"></i>
                         </div>
-                        <a href="#" class="dnone" id="forgotpass" style="float:right;text-decoration:none;color:#72e001">Forgot Password?</a>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="Login-btn">Login</button>
-                    <div class="form_footer">
-                        <span>OR</span>
-                        <div class="social_container d-flex align-items-center">
-                            <div class="facebook">
-                                <a href="#" class="para d-flex align-items-center justify-content-evenly"><img src="assets/images/contact/facebook.png" alt="Sign Up With Facebook"> FACEBOOK</a>
-                            </div>
-                            <div class="google">
-                                <a href="#" class="para d-flex align-items-center justify-content-evenly"><img src="assets/images/contact/google.png" alt="Sign Up With Google"> GOOGLE</a>
-                            </div>
-                        </div>
-                        <p class="para">I don't have an account. <a href="signup.php">Sign Up</a></p>
-                    </div>
+                    <button type="submit" class="btn btn-primary" id="Reset-btn">Reset Password</button>
                 </form>
             </div>
         </div>
     </section>
-    <!--====login section end====-->
+    <!--====Reset section end====-->
 
-    <!--====footer navbar start-->
-<footer>
-        <div class="container">
-            <div class="row footer_nav d-flex align-items-center">
-                <div class="col-lg-12">
-                    <ul class="nav justify-content-center ">
-                        <li class="nav-item">
-                            <a class="nav-link ml-0" href="contact.php">CONTACT US</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">TERMS OF USE</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">PRIVACY POLICY</a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-            <hr>
-            <div class="row footer_copyright d-flex align-items-center">
-                <div class="col-lg-7 text-center text-sm-start">
-                    <p class="para">Copyright &#169; Soccer Spotlight 2024.</p>
-                </div>
-                <div class="col-lg-5 text-center text-sm-start text-lg-end">
-                    <p class="para">All rights reserved</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!--====footer navbar end====-->
 
     <!--===scroll bottom to top===-->
     <a href="#" class="scrollToTop"><i class="flaticon-up-chevron"></i></a>
@@ -269,71 +117,42 @@
     <!--====js scripts end====-->
     <script>
         $(document).ready(function(){
-            $("#Login-btn").click(function(e){
-                e.preventDefault();
+            $("#Reset-btn").click(function(e){
+            e.preventDefault();
+            if($("#Pass-Reset")[0].checkValidity())
+            {
+                $("#Reset-btn").html("...please wait")
                 $.ajax({
                     url:"includes/action.php",
                     method:"post",
-                    data:$("#Login-form").serialize()+"&action=Login",
+                    data:$("#Pass-Reset").serialize()+"&action=PassReset",
                     dataType:"json",
                     success:function(response){
-                        console.log(response);
-                       
-                        if(response.status=="success"){
-                            $("#Login-btn").html("...Please wait");
-                            $("#Login-response").html(response.msg);
+                        console.log("yes");
+                       if(response.status=="success")
+                       {
+                            $("#Reset-response").html(response.msg);
+                            $("#Reset-btn").html("Reset Password")
+                            console.log(response.msg);
                             setTimeout(() => {
-                                url="Admin/my-profile.php";
-                                window.location.href=url;
-                            }, 3000);
-                        }
-                        else if(response.status=="otp-send")
-                        {   
-                            $("#Login-btn").html("...Please wait");
-                            $("#Login-response").html(response.msg);
+                                window.close();  
+                            }, 5000);
+                       }
+                       else if(response.status=="failed")
+                       {
+                        $("#Reset-response").html(response.msg);
                             setTimeout(() => {
-                            url="otp-verify.php?flag=2"+"&email="+response.email;
-                            window.location.href=url;
-                            },3000);
-                        }     
-                        else if(response.status=="failed")
-                        {
-                            $("#Login-response").html(response.msg);
-                            $(".alert button").click(function(e){
-                                e.preventDefault();
-                                $(this).parent().addClass("dnone");
-                            });
-                            if(response.flag=="forgot")
-                            {
-                                $("#forgotpass").removeClass("dnone");
-                                $("#forgotpass").click(function(e){
-                                    e.preventDefault();
-                                    if($("#Login-form")[0].checkValidity())
-                                    {
-                                        $.ajax({
-                                            url:"includes/action.php",
-                                            method:"post",
-                                            data:$("#Login-form").serialize()+"&action=forgot",
-                                            dataType:"json",
-                                            success:function(response){
-                                                setTimeout(()=>{
-                                                    window.location.href="forgot.php";
-                                                },2000);      
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-                        }
-                               
+                                $("#Reset-btn").html("Reset Password")  
+                            },2000);
+                           
+                            console.log("failed");
+                           
+                       }
                     }
                 });
-            });
-            $(".alert button").click(function(e){
-                e.preventDefault();
-                $(this).parent().addClass("dnone");
-            });
+            }
         });
+    });
     </script>
 </body>
 

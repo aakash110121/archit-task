@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2024 at 12:58 PM
+-- Generation Time: Nov 26, 2024 at 08:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -50,6 +50,13 @@ CREATE TABLE `db_user` (
   `isAuthenticated` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `db_user`
+--
+
+INSERT INTO `db_user` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `deleted`, `isAuthenticated`) VALUES
+(93, 'archit', 'verma', 'archit.avology@gmail.com', '6239763288', '$2y$10$yiqQiri0pOe5aCJEaNQwQeAfIeAwbAeNlDWjOq5/ttO8RrEpTB20y', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -75,6 +82,34 @@ CREATE TABLE `otp_detail` (
   `otp` varchar(8) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `otp_detail`
+--
+
+INSERT INTO `otp_detail` (`id`, `email`, `otp`, `createdAt`) VALUES
+(35, 'archit.avology@gmail.com', '81753946', '2024-11-26 07:37:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_reset`
+--
+
+CREATE TABLE `password_reset` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `token` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `password_reset`
+--
+
+INSERT INTO `password_reset` (`id`, `email`, `token`) VALUES
+(16, 'archit.avology@gmail.com', '247179c65737e'),
+(17, 'archit.avology@gmail.com', 'e3a2f77415666'),
+(18, 'archit.avology@gmail.com', '72536794c4a57');
 
 -- --------------------------------------------------------
 
@@ -117,6 +152,12 @@ ALTER TABLE `otp_detail`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `password_reset`
+--
+ALTER TABLE `password_reset`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `spam_logs`
 --
 ALTER TABLE `spam_logs`
@@ -136,7 +177,7 @@ ALTER TABLE `banned_user`
 -- AUTO_INCREMENT for table `db_user`
 --
 ALTER TABLE `db_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `mail_subscribers`
@@ -148,7 +189,13 @@ ALTER TABLE `mail_subscribers`
 -- AUTO_INCREMENT for table `otp_detail`
 --
 ALTER TABLE `otp_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `password_reset`
+--
+ALTER TABLE `password_reset`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `spam_logs`

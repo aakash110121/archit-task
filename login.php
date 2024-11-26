@@ -318,9 +318,25 @@
                     {
                         console.log("inside forgot");
                         $.ajax({
-                            url:"forgot.php",
+                            url:"includes/action.php",
                             method:"post",
                             data:$("#Login-form").serialize()+"&action=forgot",
+                            dataType:"json",
+                            success(response)
+                            {
+                                if(response.status="success")
+                                {
+                                    setTimeout(()=>{
+                                        $("#Login-response").html(response.msg);
+                                        $("#forgotpass").addClass("dnone");
+                                        $(".alert button").click(function(e){
+                                        e.preventDefault();
+                                        $("#Login-response").addClass("dnone");
+                                    });
+                                    },1500)
+                                   
+                                }
+                            }
                         });
                     }
             });

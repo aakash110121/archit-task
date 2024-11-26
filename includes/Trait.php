@@ -103,4 +103,34 @@
         return $msg;
     }
   }
+  Trait PassReset{
+    public function Password_reset($email,$token){
+        $sql="INSERT INTO password_reset(email,token) VALUES(:email,:token)";
+        $smtp=$this->conn->prepare($sql);
+        $smtp->execute(["email"=>$email,"token"=>$token]);
+    }
+    public function get_email($token){
+        $sql="SELECT email from password_reset where token=:token";
+        $smtp=$this->conn->prepare($sql);
+        $smtp->execute(["token"=>$token]);
+        $res=$smtp->fetch(PDO::FETCH_ASSOC);
+        return $res;
+    } 
+    public function pass_reset_verify($token,$email)
+    { 
+        $sql="SELECT email from password_reset where token=:token AND email=:email";
+        $smtp=$this->conn->prepare($sql);
+        $smtp->execute(["email"=>$email,"token"=>$token]);
+        $res=$smtp->fetch(PDO::FETCH_ASSOC);
+        return $res;
+    }
+    public function PasswordReset($pass,$email)
+    {
+        $sql="UPDATE db_user SET password=:password WHERE email=:email";
+        $smtp=$this->conn->prepare($sql);
+        $smtp->execute(["email"=>$email,"password"=>$pass]);
+        return true;
+    }
+  }
   ?>
+

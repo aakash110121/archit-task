@@ -37,6 +37,10 @@
                 
             require "forgot.php";
         }
+        else if ($_POST["action"] == "PassReset"){
+                
+            require "PassReset.php";
+        }
     }
     else if(isset($_GET["action"]))
     {
