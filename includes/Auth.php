@@ -106,6 +106,8 @@ Class Auth extends Connection{
     use responsemsg;
     Use mail;
     Use PassReset;
+    Use UrlReset;
+    Use GetUrl;
 }
 $db=new Auth();
 ?>

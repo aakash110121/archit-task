@@ -5,6 +5,7 @@
     <!--==== my profile ====-->
     
     <section class="my-profile">
+    
         <div class="container">
             <div class="profile">
                 <div class="row">
@@ -12,9 +13,29 @@
                         <div class="profile-side">
                             <div class="profile-sec">
                                 <div class="user_img">
+                                <div id="profile-update" style="background-image:none;">
+
+                                </div>
                                     <div class="update_img_user">
-                                        <img src="../assets/images/dp.png" alt="user_img">
-                                        <span class="edit_pan"><i class="fa-solid fa-pen"></i> </span>
+                                        <?php
+                                            
+                                            $url=$db->imageUrl($data["email"]);
+                                            if($url==NULL)
+                                            {
+                                        ?>
+                                            <a href="#" style="text-decoration:none;"> <img  src="../assets/images/dp.png" alt="user_img" id="profile-pic">
+                                        <?php
+                                            }
+                                            else
+                                            {
+                                                $url=$url["image_blob"];
+                                        ?>
+                                                <a href="#" style="text-decoration:none;"> <img  src="<?=$url?>" alt="user_img" id="profile-pic">
+                                        <?php
+                                            }
+                                        ?>
+                                        <span class="edit_pan"><i class="fa-solid fa-pen" style="color:black"></i> </span></a>
+                                        <input type="file" class="dnone" id="trigger-file">
                                     </div>
                                     <div class="user_name">
                                         <h3 id="upd-user-icon"><?=$data["first_name"]." ".$data["last_name"]?> </h3>
@@ -22,7 +43,7 @@
                                 </div>
                                 <div class="edit_option_bar">
                                     <div class="content-bar">
-                                        <span class="tabedit">Edit Profile</a>
+                                        <a href="#" id="edit-profile"><span class="tabedit">Edit Profile</span></a>
                                     </div>
                                     <div class="content-bar">
                                         <span class="tabedit">Change password</span>

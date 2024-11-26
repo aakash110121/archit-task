@@ -61,6 +61,11 @@
     <!--custom css start-->
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        .dnone{
+            display:none;
+        }
+    </style>
 </head>
 
 <body class="dark">
@@ -84,7 +89,22 @@
                         <div class="avatar">
                             <div class="avatar-content">
                             <a href="#">
-                                    <img src="../assets/images/dp.png" alt="dp"><span id="upd-user">
+                            <?php
+                                $url=$db->imageUrl($data["email"]);
+                                if($url==NULL)
+                                {
+                            ?>
+                                    <img src="../assets/images/dp.png" alt="dp" id="dp-dashboard"><span id="upd-user">
+                            <?php
+                                }
+                                else
+                                {
+                                    $url=$url["image_blob"]
+                            ?>
+                                    <img src="<?=$url?>" alt="dp" id="dp-dashboard"><span id="upd-user">
+                            <?php
+                                }
+                            ?>
                                         <?php
                                             
                                              if(isset($_SESSION["user"]))

@@ -41,6 +41,10 @@
                 
             require "PassReset.php";
         }
+        else if ($_POST["action"] == "editProfile"){
+                
+            require "editProfile.php";
+        }
     }
     else if(isset($_GET["action"]))
     {

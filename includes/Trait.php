@@ -132,5 +132,24 @@
         return true;
     }
   }
+  Trait UrlReset{
+    public function url_insert($email,$url)
+    {
+        $sql="UPDATE db_user SET image_blob=:blob WHERE email=:email";
+        $smtp=$this->conn->prepare($sql);
+        $smtp->execute(["blob"=>$url,"email"=>$email]);
+        return true;
+    }
+  }
+  Trait GetUrl{
+    public function imageUrl($email)
+    {
+        $sql="SELECT image_blob FROM db_user WHERE email=:email";
+        $smtp=$this->conn->prepare($sql);
+        $smtp->execute(["email"=>$email]);
+        $url=$smtp->fetch(PDO::FETCH_ASSOC);
+        return $url;
+    }
+  }
   ?>
 

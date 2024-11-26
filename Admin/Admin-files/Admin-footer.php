@@ -72,6 +72,38 @@
                 }
             });
         });
+        $("#profile-pic").click(function(){
+            $("#trigger-file").trigger('click');
+            $("#trigger-file").on('change',function(){
+                file=this.files[0];
+                // console.log(file);
+                let reader=new FileReader();
+                reader.onload=function(event){
+                    let url=event.target.result;
+                    $("#profile-pic").attr("src",url);
+                    $("#dp-dashboard").attr("src",url);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+        $("#edit-profile").on('click',function(){
+            path=$("#profile-pic").attr("src");
+            // console.log($img);
+            email=$("#email").val();
+            const formdata=new FormData();
+            formdata.append("email",email);
+            formdata.append("path",path);
+            formdata.append("action","editProfile")
+            fetch('../includes/action.php',{
+                method:'POST',
+                body:formdata,
+            }) .then((response)=>response.json()).then((data)=>{
+               if(data.status=="success")
+               {
+                    $("#profile-update").html(data.msg);
+               }
+            })
+        });
     });
 </script>
 
