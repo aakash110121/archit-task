@@ -23,7 +23,7 @@
                         $mail->Port = $_ENV['MAIL_PORT'];  // TLS port is 587
                     
                         // Set the sender email (user's email address)
-                        $mail->setFrom( $_ENV['Username']);  // $email is user input
+                        $mail->setFrom($email);  // $email is user input
                         $mail->SMTPOptions = [
                          'ssl' => [
                              'verify_peer' => false,
@@ -33,7 +33,7 @@
                      ];
                      
                         // Add the recipient email (admin or destination email)
-                        $mail->addAddress($_ENV['Username'], "archit"); 
+                        $mail->addAddress($_ENV['Admin'], "Admin"); 
                         $mail->addReplyTo($email, 'Add reply');
                         // Set email format to HTML
                         $mail->isHTML(true);

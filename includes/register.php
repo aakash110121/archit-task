@@ -41,7 +41,7 @@
               $mail->Port = $_ENV['MAIL_PORT'];  // TLS port is 587
           
               // Set the sender email (user's email address)
-              $mail->setFrom( $_ENV['Username']);  // $email is user input
+              $mail->setFrom( $_ENV['Admin']);  // $email is user input
               $mail->SMTPOptions = [
                'ssl' => [
                    'verify_peer' => false,
@@ -52,7 +52,7 @@
            
               // Add the recipient email (admin or destination email)
               $mail->addAddress($email); 
-              $mail->addReplyTo($_ENV['Username'], 'Add reply');
+              $mail->addReplyTo($_ENV['Admin'], 'Add reply');
               // Set email format to HTML
               $mail->isHTML(true);
               $mail->Subject = "Registration link";

@@ -22,7 +22,7 @@
             $mail->Port = $_ENV['MAIL_PORT'];  
         
            
-            $mail->setFrom( $_ENV['Username']); 
+            $mail->setFrom( $_ENV['Admin']); 
             $mail->SMTPOptions = [
                 'ssl' => [
                     'verify_peer' => false,
@@ -33,10 +33,10 @@
             
            
             $mail->addAddress($email); 
-            $mail->addReplyTo( $_ENV['Username'], 'Add reply');
+            $mail->addReplyTo( $_ENV['Admin'], 'Add reply');
           
             $mail->isHTML(true);
-            $mail->Subject = "OTP request";
+            $mail->Subject = "Password Reset";
            
             $mail->Body = "
             <div>

@@ -45,7 +45,7 @@
                                   $mail->Port = $_ENV['MAIL_PORT'];  // TLS port is 587
                               
                                   // Set the sender email (user's email address)
-                                  $mail->setFrom( $_ENV['Username']);  // $email is user input
+                                  $mail->setFrom( $_ENV['Admin']);  // $email is user input
                                   $mail->SMTPOptions = [
                                       'ssl' => [
                                           'verify_peer' => false,
@@ -56,7 +56,7 @@
                                   
                                   // Add the recipient email (admin or destination email)
                                   $mail->addAddress($email); 
-                                  $mail->addReplyTo( $_ENV['Username'], 'Add reply');
+                                  $mail->addReplyTo( $_ENV['Admin'], 'Add reply');
                                   // Set email format to HTML
                                   $mail->isHTML(true);
                                   $mail->Subject = "OTP request";
@@ -67,9 +67,7 @@
                                       <p>Your verification code is <span style="color:red;">' . $otp . '</span>. It is valid for 5 minutes. Do not share this code with anyone.</p>  
                                   </div>';
                                   
-                                  // $mail->SMTPDebug = 3; // Set to 0 in production to avoid exposing sensitive information
                                  
-                                  // Send the email
                                  
                                 
                                   if($mail->send())
