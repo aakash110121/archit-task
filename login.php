@@ -275,75 +275,77 @@
                     url:"includes/action.php",
                     method:"post",
                     data:$("#Login-form").serialize()+"&action=Login",
-                    dataType:"json",
+                    // dataType:"json",
                     success:function(response){
                         console.log(response);
-                       
-                        if(response.status=="success"){
-                            $("#Login-btn").html("...Please wait");
-                            $("#Login-response").html(response.msg);
-                            setTimeout(() => {
-                                url="Admin/my-profile.php";
-                                window.location.href=url;
-                            }, 3000);
-                        }
-                        else if(response.status=="otp-send")
-                        {   
-                            $("#Login-btn").html("...Please wait");
-                            $("#Login-response").html(response.msg);
-                            setTimeout(() => {
-                            url="otp-verify.php?flag=2"+"&email="+response.email;
-                            window.location.href=url;
-                            },3000);
-                        }     
-                        else if(response.status=="failed")
-                        {
-                            $("#Login-response").html(response.msg);
-                            $(".alert button").click(function(e){
-                                e.preventDefault();
-                                $(this).parent().addClass("dnone");
-                            });
-                            if(response.flag=="forgot")
-                            {
-                                $("#forgotpass").removeClass("dnone");
-                            }
-                        }
+                    }
+                });
+            });
+            //             if(response.status=="success"){
+            //                 $("#Login-btn").html("...Please wait");
+            //                 $("#Login-response").html(response.msg);
+            //                 setTimeout(() => {
+            //                     url="Admin/my-profile.php";
+            //                     window.location.href=url;
+            //                 }, 3000);
+            //             }
+            //             else if(response.status=="otp-send")
+            //             {   
+            //                 $("#Login-btn").html("...Please wait");
+            //                 $("#Login-response").html(response.msg);
+            //                 setTimeout(() => {
+            //                 url="otp-verify.php?flag=2"+"&email="+response.email;
+            //                 window.location.href=url;
+            //                 },3000);
+            //             }     
+            //             else if(response.status=="failed")
+            //             {
+            //                 $("#Login-response").html(response.msg);
+            //                 $(".alert button").click(function(e){
+            //                     e.preventDefault();
+            //                     $(this).parent().addClass("dnone");
+            //                 });
+            //                 if(response.flag=="forgot")
+            //                 {
+            //                     $("#forgotpass").removeClass("dnone");
+            //                 }
+            //             }
                                
-                    }
-                });
-            });
-            $("#forgotpass").click(function(e){
-                    e.preventDefault();
-                    if($("#Login-form")[0].checkValidity())
-                    {
-                        console.log("inside forgot");
-                        $.ajax({
-                            url:"includes/action.php",
-                            method:"post",
-                            data:$("#Login-form").serialize()+"&action=forgot",
-                            dataType:"json",
-                            success(response)
-                            {
-                                if(response.status="success")
-                                {
-                                    setTimeout(()=>{
-                                        $("#Login-response").html(response.msg);
-                                        $("#forgotpass").addClass("dnone");
-                                        $(".alert button").click(function(e){
-                                        e.preventDefault();
-                                        $("#Login-response").addClass("dnone");
-                                    });
-                                    },1500)
+            //         }
+            //     });
+            // });
+            // $("#forgotpass").click(function(e){
+            //         e.preventDefault();
+            //         if($("#Login-form")[0].checkValidity())
+            //         {
+            //             console.log("inside forgot");
+            //             $.ajax({
+            //                 url:"includes/action.php",
+            //                 method:"post",
+            //                 data:$("#Login-form").serialize()+"&action=forgot",
+            //                 dataType:"json",
+            //                 success(response)
+            //                 {
+            //                     if(response.status="success")
+            //                     {
+            //                         setTimeout(()=>{
+            //                             $("#Login-response").html(response.msg);
+            //                             $("#forgotpass").addClass("dnone");
+            //                             $(".alert button").click(function(e){
+            //                             e.preventDefault();
+            //                             $("#Login-response").addClass("dnone");
+            //                         });
+            //                         },1500)
                                    
-                                }
-                            }
-                        });
-                    }
-            });
-                $(".alert button").click(function(e){
-                    e.preventDefault();
-                    $(this).parent().addClass("dnone");
-                });
+            //                     }
+            //                 }
+            //             });
+            //         }
+            // });
+            //     $(".alert button").click(function(e){
+            //         e.preventDefault();
+            //         $(this).parent().addClass("dnone");
+            //     });
         });
     </script>
 </body>

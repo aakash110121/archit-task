@@ -1,9 +1,4 @@
-<?php
-    if(isset($_COOKIE["email"])){
-        header("Location:Admin/my-profile.php");
-    }
-    session_start();
-?>
+
 <!DOCTYPE html>
 <html lang="en-US">
 

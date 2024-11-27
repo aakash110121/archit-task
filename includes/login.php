@@ -112,13 +112,16 @@
           }
           else
           {
-                  $msg=["status"=>"failed","msg"=>$db->msg("danger","Password doesnot match"),"flag"=>"forgot"];
-                  $json=json_encode($msg);
-                  echo $json;
+                  $db->wrong_pass_log($email);
+                //   $msg=["status"=>"failed","msg"=>$db->msg("danger","Password doesnot match"),"flag"=>"forgot"];
+                //   $json=json_encode($msg);
+                //   echo $json;
+                  
           }
       }
       else
       {
+           
           $msg=["status"=>"failed","msg"=>$db->msg("danger","User does not exists")];
           $json=json_encode($msg);
           echo $json;

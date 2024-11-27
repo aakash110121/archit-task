@@ -103,6 +103,110 @@ Class Auth extends Connection{
         $res=$stmt->fetch(PDO::FETCH_ASSOC);
         return $res;
     }
+   
+
+
+
+
+    /*<<<<<<<<<<<<<<<<<<<<Login Form password ban>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+    public function req_frequency($email)
+    {
+        $sql="SELECT count(*) AS count FROM wrong_pass_logs WHERE email=:email AND submit_time<NOW()-INTERVAL 5 MINUTE";
+        $stmt=$this->conn->prepare($sql);
+        $stmt->execute(["email"=>$email]);
+        $res=$stmt->fetch(PDO::FETCH_ASSOC);
+        $count=$res["count"];
+        return $count;  
+    }
+    public function count($email)
+    {
+        $sql="SELECT count(*) AS count FROM wrong_pass_logs WHERE email=:email AND submit_time>=NOW()-INTERVAL 5 MINUTE";
+        $stmt=$this->conn->prepare($sql);
+        $stmt->execute(["email"=>$email]);
+        $res=$stmt->fetch(PDO::FETCH_ASSOC);
+        $count=$res["count"];
+        return $count;
+    }
+    public function wrong_pass_count($email){
+        $count=$this->count($email);
+        $req_freq=$this->req_frequency($email);
+        if($req_freq!=0)
+        {
+            $sql="DELETE FROM wrong_pass_logs WHERE email=:email AND submit_time<NOW()-INTERVAL 5 MINUTE";
+            $stmt=$this->conn->prepare($sql);
+            $stmt->execute(["email"=>$email]);
+            $count=$this->wrong_pass_remove_banned_user($email);
+            $count=$this->count($email);    
+        }
+       
+        return $count;
+    }
+    
+    public function wrong_pass_log($email)
+    {
+        $count=$this->wrong_pass_count($email);
+        $attempts=3-$count;
+        if($attempts>=1&&$attempts<=3)
+        { 
+            
+                $sql="INSERT INTO wrong_pass_logs(email,submit_time) VALUES(:email,NOW())"; 
+                $stmt=$this->conn->prepare($sql);
+                $stmt->execute(["email"=>$email]);
+ 
+        }
+        else
+        {
+            if($this->wrong_pass_check_user_ban($email)==NULL)
+            {
+                $this->wrong_pass_user_ban($email);
+            }  
+            $this->wrong_pass_ban_left($email);
+        }
+    }
+    public function wrong_pass_check_user_ban($email)
+    {   
+        $sql="SELECT email FROM wrong_pass_banned WHERE email=:email";
+        $stmt=$this->conn->prepare($sql);
+        $stmt->execute(["email"=>$email]);
+        $res=$stmt->fetch(PDO::FETCH_ASSOC);
+        return $res;
+    }
+    public function wrong_pass_user_ban($email)
+    {
+        $sql="INSERT INTO wrong_pass_banned(email,createdAt) VALUES(:email,NOW())"; 
+        $stmt=$this->conn->prepare($sql);
+        $stmt->execute(["email"=>$email]); 
+    } 
+    public function verify_user_ban($email)
+    {
+        $sql="SELECT email FROM wrong_pass_banned WHERE createdAt<NOW()-INTERVAL 1 HOUR and email=:email";
+        $stmt=$this->conn->prepare($sql);
+        $stmt->execute(["email"=>$email]);
+        $res=$stmt->fetch(PDO::FETCH_ASSOC);
+        return $res;
+    }
+    public function  wrong_pass_ban_left($email)
+    {
+        $res=$this->verify_user_ban($email);
+        if($res!=NULL)
+        {
+            $this->wrong_pass_remove_log($email);
+            $this->wrong_pass_remove_banned_user($email);
+        }
+    }
+    public function wrong_pass_remove_log($email){
+            $sql="DELETE FROM wrong_pass_logs where email=:email"; 
+            $stmt=$this->conn->prepare($sql);
+            $stmt->execute(["email"=>$email]); 
+    }
+    public function wrong_pass_remove_banned_user($email){
+            $sql="DELETE FROM wrong_pass_banned where email=:email"; 
+            $stmt=$this->conn->prepare($sql);
+            $stmt->execute(["email"=>$email]); 
+    }
+   
+    
+     /*<<<<<<<<<<<<<<<<<<<<Login Form password ban end>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     use responsemsg;
     Use mail;
     Use PassReset;
