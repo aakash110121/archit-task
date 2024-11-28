@@ -68,25 +68,6 @@
                     <div class="profile">
                         <div class="avatar">
                             <div class="avatar-content">
-                                <a href="#">
-                                    <img src="assets/images/dp.png" alt="dp"><span>
-                                        <?php
-                                             if(isset($_SESSION["user"]))
-                                             {
-                                                 include "includes/session.php";
-                                                //  print_r($data);
-                                        ?>
-                                            <?=$data["first_name"]." ".$data["last_name"]?>
-                                        <?php
-                                             }
-                                             else
-                                             {
-                                        ?>
-                                             <?='Guest'?>
-                                        <?php  
-                                             }
-                                        ?>
-                                        </span></a>
                                     <?php
                                         if(isset($_COOKIE["email"]))
                                         {
@@ -164,6 +145,9 @@
                     <a href="index.php" class="registration_logo">
                         <img src="assets/images/logo.png" alt="Spovest Logo">
                     </a>
+                </div>
+                <div id="Login-attempts">
+                              
                 </div>
                 <div id="Login-response">
                 <?php
@@ -271,81 +255,95 @@
         $(document).ready(function(){
             $("#Login-btn").click(function(e){
                 e.preventDefault();
+                $("#Login-btn").html("...Please wait");
                 $.ajax({
                     url:"includes/action.php",
                     method:"post",
                     data:$("#Login-form").serialize()+"&action=Login",
-                    // dataType:"json",
+                    dataType:"json",
                     success:function(response){
                         console.log(response);
-                    }
+                       
+                        if(response.status=="success"){
+                            $("#Login-btn").html("Login");
+                            $("#Login-response").html(response.msg);
+                            setTimeout(() => {
+                                url="Admin/my-profile.php";
+                                window.location.href=url;
+                            }, 3000);
+                        }
+                        else if(response.status=="otp-send")
+                        {   
+                            $("#Login-attempts").html();
+                           
+                            $("#Login-response").html(response.msg);
+                            setTimeout(() => {
+                            $("#Login-btn").html("Login");
+                            url="otp-verify.php?flag=2"+"&email="+response.email;
+                            window.location.href=url;
+                            },3000);
+                        }     
+                        else if(response.status=="failed")
+                        {   $("#Login-btn").html("Login");
+                            if(response.flag=="forgot")
+                            {
+                                $("#Login-response").html(response.msg);
+                                $("#Login-attempts").html(response.attempts);
+                            }
+                            else if(response.flag=="banned")
+                            {
+                                $("#Login-response").html(response.msg);
+                                $("#Login-attempts").html(response.time);
+                            }
+                           else
+                           {
+                            $("#Login-response").html(response.msg);
+                           }
+                            $(".alert button").click(function(e){
+                                e.preventDefault();
+                                $(this).parent().addClass("dnone");
+                            });
+                            if(response.flag=="forgot")
+                            {
+                                $("#forgotpass").removeClass("dnone");
+                            }
+                        }
+                    }           
+                    });
                 });
-            });
-            //             if(response.status=="success"){
-            //                 $("#Login-btn").html("...Please wait");
-            //                 $("#Login-response").html(response.msg);
-            //                 setTimeout(() => {
-            //                     url="Admin/my-profile.php";
-            //                     window.location.href=url;
-            //                 }, 3000);
-            //             }
-            //             else if(response.status=="otp-send")
-            //             {   
-            //                 $("#Login-btn").html("...Please wait");
-            //                 $("#Login-response").html(response.msg);
-            //                 setTimeout(() => {
-            //                 url="otp-verify.php?flag=2"+"&email="+response.email;
-            //                 window.location.href=url;
-            //                 },3000);
-            //             }     
-            //             else if(response.status=="failed")
-            //             {
-            //                 $("#Login-response").html(response.msg);
-            //                 $(".alert button").click(function(e){
-            //                     e.preventDefault();
-            //                     $(this).parent().addClass("dnone");
-            //                 });
-            //                 if(response.flag=="forgot")
-            //                 {
-            //                     $("#forgotpass").removeClass("dnone");
-            //                 }
-            //             }
-                               
-            //         }
-            //     });
-            // });
-            // $("#forgotpass").click(function(e){
-            //         e.preventDefault();
-            //         if($("#Login-form")[0].checkValidity())
-            //         {
-            //             console.log("inside forgot");
-            //             $.ajax({
-            //                 url:"includes/action.php",
-            //                 method:"post",
-            //                 data:$("#Login-form").serialize()+"&action=forgot",
-            //                 dataType:"json",
-            //                 success(response)
-            //                 {
-            //                     if(response.status="success")
-            //                     {
-            //                         setTimeout(()=>{
-            //                             $("#Login-response").html(response.msg);
-            //                             $("#forgotpass").addClass("dnone");
-            //                             $(".alert button").click(function(e){
-            //                             e.preventDefault();
-            //                             $("#Login-response").addClass("dnone");
-            //                         });
-            //                         },1500)
+    
+            $("#forgotpass").click(function(e){
+                    e.preventDefault();
+                    if($("#Login-form")[0].checkValidity())
+                    {
+                        console.log("inside forgot");
+                        $.ajax({
+                            url:"includes/action.php",
+                            method:"post",
+                            data:$("#Login-form").serialize()+"&action=forgot",
+                            dataType:"json",
+                            success(response)
+                            {
+                                if(response.status="success")
+                                {
+                                    setTimeout(()=>{
+                                        $("#Login-response").html(response.msg);
+                                        $("#forgotpass").addClass("dnone");
+                                        $(".alert button").click(function(e){
+                                        e.preventDefault();
+                                        $("#Login-response").addClass("dnone");
+                                    });
+                                    },1500)
                                    
-            //                     }
-            //                 }
-            //             });
-            //         }
-            // });
-            //     $(".alert button").click(function(e){
-            //         e.preventDefault();
-            //         $(this).parent().addClass("dnone");
-            //     });
+                                }
+                            }
+                        });
+                    }
+            });
+                $(".alert button").click(function(e){
+                    e.preventDefault();
+                    $(this).parent().addClass("dnone");
+                });
         });
     </script>
 </body>

@@ -64,25 +64,7 @@
                         <div class="avatar">
                             <div class="avatar-content">
                             <a href="#">
-                                    <img src="assets/images/dp.png" alt="dp"><span>
-                                        <?php
- 
-                                             if(isset($_COOKIE["email"]))
-                                             {
-                                                 include "php/php-files/session.php";
-                                                //  print_r($data);
-                                        ?>
-                                            <?=$data["first_name"]." ".$data["last_name"]?>
-                                        <?php
-                                             }
-                                             else
-                                             {
-                                        ?>
-                                             <?='Guest'?>
-                                        <?php  
-                                             }
-                                        ?>
-                                        </span></a>
+                                       
                                         <?php
                                         if(isset($_COOKIE["email"]))
                                         {

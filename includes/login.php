@@ -6,9 +6,13 @@
       $email=$db->test_input($_POST["email"]);
       $password=$db->test_input($_POST["password"]);
       if($LoggedUser=$db->LoginUser($email)){
-
+            
           if(password_verify($password,$LoggedUser["password"]))//password verify
-          {   $result=$db->check_user_authenticated($email);//isAuthenticated=0 initially it should be 1 returns null if not 1
+          {   
+              $user_ban=$db->wrong_pass_check_user_ban($email);
+              if($user_ban==NULL)
+              {
+              $result=$db->check_user_authenticated($email);//isAuthenticated=0 initially it should be 1 returns null if not 1
               if($result!=NULL)
               {
                   if(isset($_COOKIE["emailRemember"])&&$email==$_COOKIE["emailRemember"])
@@ -109,14 +113,46 @@
                   $json=json_encode($msg);
                   echo $json;
               }
+            }
+            else
+            {
+                $time=$db->wrong_pass_log($email); 
+                $res=$db->ban_exists($email);
+                $amt=$res["ban_count"];
+                $type=$amt!=2?"Minutes":"Hours";
+                $msg=["status"=>"failed","msg"=>$db->msg("danger","User banned"),"flag"=>"banned","time"=>$db->msg("danger","Banned for"." ".$time." ".$type)];
+                $json=json_encode($msg);
+                echo $json;
+            } 
           }
           else
           {
-                  $db->wrong_pass_log($email);
-                //   $msg=["status"=>"failed","msg"=>$db->msg("danger","Password doesnot match"),"flag"=>"forgot"];
-                //   $json=json_encode($msg);
-                //   echo $json;
-                  
+                  $time=$db->wrong_pass_log($email);
+                  if($time==NULL)
+                  {
+                    $count=$db->is_empty($email);
+                    if($count==0)
+                    {
+                        $msg=["status"=>"failed","msg"=>$db->msg("danger","Password doesnt match"),"flag"=>"forgot","attempts"=>$db->msg("danger","Attempts Left"." ".$db->attempts." "."of 3")];
+                        $json=json_encode($msg);
+                        echo $json;
+                    }   
+                    else
+                    {
+                        $msg=["status"=>"failed","msg"=>$db->msg("danger","Password doesnt match"),"flag"=>"forgot","attempts"=>$db->msg("danger","Attempts Left"." ".$db->attempts." "."of 3")];
+                        $json=json_encode($msg);
+                        echo $json;
+                    }                                                                                                                     // attempts"=>$db->attempts                         
+                  }
+                  else
+                  {
+                    $res=$db->ban_exists($email);
+                    $amt=$res["ban_count"];
+                    $type=$amt!=2?"Minutes":"Hours";
+                    $msg=["status"=>"failed","msg"=>$db->msg("danger","User banned"),"flag"=>"banned","time"=>$db->msg("danger","Banned for"." ".$time." ".$type)];
+                    $json=json_encode($msg);
+                    echo $json;
+                  }   
           }
       }
       else
