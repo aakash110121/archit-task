@@ -90,22 +90,8 @@
                         <div class="avatar">
                             <div class="avatar-content">
                             <a href="#">
-                            <?php
-                                $url=$db->imageUrl($data["email"]);
-                                if($url==NULL)
-                                {
-                            ?>
+                      
                                     <img src="../assets/images/dp.png" alt="dp" id="dp-dashboard"><span id="upd-user">
-                            <?php
-                                }
-                                else
-                                {
-                                    $url=$url["image_blob"]
-                            ?>
-                                    <img src="<?=$url?>" alt="dp" id="dp-dashboard"><span id="upd-user">
-                            <?php
-                                }
-                            ?>
                                         <?php
                                             
                                              if(isset($_SESSION["user"]))

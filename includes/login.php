@@ -119,11 +119,10 @@
                 $time=$db->wrong_pass_log($email); 
                 $res=$db->ban_exists($email);
                 $amt=$res["ban_count"];
-                echo "uSER BANNED CORRECT PASSWORD";
-                // $type=$amt!=2?"Minutes":"Hours";
-                // $msg=["status"=>"failed","msg"=>$db->msg("danger","User banned"),"flag"=>"banned","time"=>$db->msg("danger","Banned for"." ".$time." ".$type)];
-                // $json=json_encode($msg);
-                // echo $json;
+                $type=$amt!=2?"Minutes":"Hours";
+                $msg=["status"=>"failed","msg"=>$db->msg("danger","User banned"),"flag"=>"banned","time"=>$db->msg("danger","Banned for"." ".$time." ".$type)];
+                $json=json_encode($msg);
+                echo $json;
             } 
           }
           else
@@ -131,26 +130,26 @@
                   $time=$db->wrong_pass_log($email);
                   if($time==NULL)
                   {
-                        echo "null value means useer is not blocked yet";
-                        // $msg=["status"=>"failed","msg"=>$db->msg("danger","Password doesnt match"),"flag"=>"forgot","attempts"=>$db->msg("danger","Attempts Left"." ".$db->attempts." "."of 3")];
-                        // $json=json_encode($msg);
-                        // echo $json;
+                       
+                        $msg=["status"=>"failed","msg"=>$db->msg("danger","Password doesnt match"),"flag"=>"forgot","attempts"=>$db->msg("danger","Attempts Left"." ".$db->attempts." "."of 3")];
+                        $json=json_encode($msg);
+                        echo $json;
                                                                                                                                    // attempts"=>$db->attempts                         
                   }
                   else if($time==404)
-                  {     echo "null value means USER WAL BLOCKED PREVIOUSLY NOW BAN LIFTED THAT LIFTER BAN 1 CLICK NO RESPONSE";
-                    // $msg=["status"=>"failed","msg"=>$db->msg("danger","Password doesnt match"),"flag"=>"forgot","attempts"=>$db->msg("danger","Attempts Left"." ".$db->attempts." "."of 3")];
-                    // $json=json_encode($msg);
-                    // echo $json;
+                  {    
+                    $msg=["status"=>"failed","msg"=>$db->msg("danger","Password doesnt match"),"flag"=>"forgot","attempts"=>$db->msg("danger","Attempts Left"." ".$db->attempts." "."of 3")];
+                    $json=json_encode($msg);
+                    echo $json;
                   }
                   else
-                  { echo "null value means useer is blocked ";
-                    // $res=$db->ban_exists($email);
-                    // $amt=$res["ban_count"];
-                    // $type=$amt!=2?"Minutes":"Hours";
-                    // $msg=["status"=>"failed","msg"=>$db->msg("danger","User banned"),"flag"=>"banned","time"=>$db->msg("danger","Banned for"." ".$time." ".$type)];
-                    // $json=json_encode($msg);
-                    // echo $json;
+                  {
+                    $res=$db->ban_exists($email);
+                    $amt=$res["ban_count"];
+                    $type=$amt!=2?"Minutes":"Hours";
+                    $msg=["status"=>"failed","msg"=>$db->msg("danger","User banned"),"flag"=>"banned","time"=>$db->msg("danger","Banned for"." ".$time." ".$type)];
+                    $json=json_encode($msg);
+                    echo $json;
                   }   
           }
       }

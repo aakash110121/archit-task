@@ -132,24 +132,40 @@
         return true;
     }
   }
-  Trait UrlReset{
-    public function url_insert($email,$url)
+  Trait UploadFile{
+    public function UploadFile($email,$path)
     {
-        $sql="UPDATE db_user SET image_blob=:blob WHERE email=:email";
-        $smtp=$this->conn->prepare($sql);
-        $smtp->execute(["blob"=>$url,"email"=>$email]);
-        return true;
+        $sql="UPDATE db_user SET image_path=:path WHERE email=:email";
+        $stmt=$this->conn->prepare($sql);
+        $stmt->execute(["path"=>$path,"email"=>$email]);
+    }
+    public function FileExists($email)
+    {
+        $sql="SELECT image_path FROM db_user WHERE email=:email";
+        $stmt=$this->conn->prepare($sql);
+        $res=$stmt->execute(["email"=>$email]);
+        return $res;
     }
   }
-  Trait GetUrl{
-    public function imageUrl($email)
-    {
-        $sql="SELECT image_blob FROM db_user WHERE email=:email";
-        $smtp=$this->conn->prepare($sql);
-        $smtp->execute(["email"=>$email]);
-        $url=$smtp->fetch(PDO::FETCH_ASSOC);
-        return $url;
-    }
-  }
+
+//   Trait UrlReset{
+//     public function url_insert($email,$url)
+//     {
+//         $sql="UPDATE db_user SET image_blob=:blob WHERE email=:email";
+//         $smtp=$this->conn->prepare($sql);
+//         $smtp->execute(["blob"=>$url,"email"=>$email]);
+//         return true;
+//     }
+//   }
+//   Trait GetUrl{
+//     public function imageUrl($email)
+//     {
+//         $sql="SELECT image_blob FROM db_user WHERE email=:email";
+//         $smtp=$this->conn->prepare($sql);
+//         $smtp->execute(["email"=>$email]);
+//         $url=$smtp->fetch(PDO::FETCH_ASSOC);
+//         return $url;
+//     }
+//   }
   ?>
 

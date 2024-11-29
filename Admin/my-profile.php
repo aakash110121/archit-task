@@ -17,25 +17,27 @@
 
                                 </div>
                                     <div class="update_img_user">
+                                        <a href="#" style="text-decoration:none;"> 
                                         <?php
-                                            
-                                            $url=$db->imageUrl($data["email"]);
-                                            if($url==NULL)
+                                            if($db->FileExists($email)==NULL)
                                             {
                                         ?>
-                                            <a href="#" style="text-decoration:none;"> <img  src="../assets/images/dp.png" alt="user_img" id="profile-pic">
+                                                <img src="../assets/images/dp.png" alt="">
                                         <?php
                                             }
                                             else
                                             {
-                                                $url=$url["image_blob"];
+                                                
                                         ?>
-                                                <a href="#" style="text-decoration:none;"> <img  src="<?=$url?>" alt="user_img" id="profile-pic">
+                                                 <img src="" alt="">
                                         <?php
                                             }
                                         ?>
                                         <span class="edit_pan"><i class="fa-solid fa-pen" style="color:black"></i> </span></a>
-                                        <input type="file" class="dnone" id="trigger-file">
+                                        <form enctype="multipart/form-data" id="profile-pic">
+                                            <input type="hidden" name="email" value="<?=$data["email"]?>" id="email">
+                                            <input type="file" class="dnone" name="file" id="trigger-file">
+                                        </form>  
                                     </div>
                                     <div class="user_name">
                                         <h3 id="upd-user-icon"><?=$data["first_name"]." ".$data["last_name"]?> </h3>

@@ -45,6 +45,10 @@
                 
             require "editProfile.php";
         }
+        else if ($_POST["action"] == "profile-pic"){
+                
+            require "profile-pic.php";
+        }
     }
     else if(isset($_GET["action"]))
     {
