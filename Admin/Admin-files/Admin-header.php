@@ -15,12 +15,13 @@
             header("Location:../includes/session.php");
         }
         else
-        {
-        $server=$_SERVER["SERVER_NAME"];
-        $url=$_SERVER["PHP_SELF"];
-        $arr=explode("/",$url);
-        $root=$arr[1];
-        $data=$db->Login($_SESSION["user"]);
+        {  
+            $server=$_SERVER["SERVER_NAME"];
+            $url=$_SERVER["PHP_SELF"];// empty/projects/archit-task/Admin/action.php
+            $arr=explode("/Admin",$url);
+            $root=$arr[0];
+            $root=trim($root);
+            $data=$db->Login($_SESSION["user"]);
         }
     }
 ?>

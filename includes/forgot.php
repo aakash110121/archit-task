@@ -2,10 +2,11 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception; 
-    $host=$_SERVER["SERVER_NAME"];
+    $server=$_SERVER["SERVER_NAME"];
     $url=$_SERVER["PHP_SELF"];
-    $arr=explode("/",$url);
-    $root=$arr[1];
+    $arr=explode("/includes",$url);
+    $root=$arr[0];
+    $root=trim($root);
     $email=$db->test_input($_POST["email"]);
     $str=uniqid();
     $token=str_shuffle($str);

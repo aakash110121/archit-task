@@ -17,10 +17,6 @@
         }
         else
         {
-        $server=$_SERVER["SERVER_NAME"];
-        $url=$_SERVER["PHP_SELF"];
-        $arr=explode("/",$url);
-        $root=$arr[1];
         $data=$db->Login($_SESSION["user"]);
         }
     }
@@ -143,14 +139,14 @@
                                 <div class="dropdown">
                                   
                                     <ul>
-                                        <li><a href="http://<?=$server?>/<?=$root?>/Admin/my-profile.php"><img src="assets/images/user.svg" alt="user">My Profile</a>
+                                        <li><a href="Admin/my-profile.php"><img src="assets/images/user.svg" alt="user">My Profile</a>
                                         </li>
                                         <li>
                                             <a href="my-matches.php"><img src="assets/images/stadium.svg" alt="stadium">My Matches</a>
                                         </li>
                                    
                                         <li>
-                                            <a href="http://<?=$server?>/<?=$root?>/Admin/logout.php" ><img src="assets/images/logout.svg" alt="logout">log Out</a>
+                                            <a href="Admin/logout.php" ><img src="assets/images/logout.svg" alt="logout">log Out</a>
                                         </li>
                                     </ul>
                                 </div>

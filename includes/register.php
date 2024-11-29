@@ -10,10 +10,10 @@
      $phone=$db->test_input($_POST["phone"]);
      $password=$db->test_input($_POST["pass"]);
      $server=$_SERVER["SERVER_NAME"];
-     $url=$_SERVER["PHP_SELF"];
-     $arr=explode("/",$url);
-     $root=$arr[1];
-
+     $url=$_SERVER["PHP_SELF"];// empty/projects/archit-task/includes/action.php
+     $arr=explode("/includes",$url);
+     $root=$arr[0];
+     $root=trim($root);
      $hash=password_hash($password,PASSWORD_DEFAULT);
      $userexist=$db->user_exists($email);
      if($userexist!=NULL)
@@ -61,7 +61,7 @@
               <div>
                   <h1>Hello User</h1><br><br>
                   <p>You have received a new registration link, please</p><br><br>
-                  <a href='http://".$server."/".$root."/includes/action.php?action=registerlink&email=$email'>click here</a><p>to register</p>  
+                  <a href='http://".$server.$root."/includes/action.php?action=registerlink&email=$email'>click here</a><p>to register</p>  
               </div>";
               
               // $mail->SMTPDebug = 3; // Set to 0 in production to avoid exposing sensitive information
