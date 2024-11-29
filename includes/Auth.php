@@ -242,6 +242,7 @@ Class Auth extends Connection{
             $this->wrong_pass_remove_log($email);
             $this->wrong_pass_remove_banned_user($email);
             $db->attempts=3;
+            return 404;
         }
         else
         {
