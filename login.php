@@ -264,50 +264,50 @@
                     success:function(response){
                         console.log(response);
                        
-                        if(response.status=="success"){
-                            $("#Login-btn").html("Login");
-                            $("#Login-response").html(response.msg);
-                            setTimeout(() => {
-                                url="Admin/my-profile.php";
-                                window.location.href=url;
-                            }, 3000);
-                        }
-                        else if(response.status=="otp-send")
-                        {   
-                            $("#Login-attempts").html();
+                        // if(response.status=="success"){
+                        //     $("#Login-btn").html("Login");
+                        //     $("#Login-response").html(response.msg);
+                        //     setTimeout(() => {
+                        //         url="Admin/my-profile.php";
+                        //         window.location.href=url;
+                        //     }, 3000);
+                        // }
+                        // else if(response.status=="otp-send")
+                        // {   
+                        //     $("#Login-attempts").html();
                            
-                            $("#Login-response").html(response.msg);
-                            setTimeout(() => {
-                            $("#Login-btn").html("Login");
-                            url="otp-verify.php?flag=2"+"&email="+response.email;
-                            window.location.href=url;
-                            },3000);
-                        }     
-                        else if(response.status=="failed")
-                        {   $("#Login-btn").html("Login");
-                            if(response.flag=="forgot")
-                            {
-                                $("#Login-response").html(response.msg);
-                                $("#Login-attempts").html(response.attempts);
-                            }
-                            else if(response.flag=="banned")
-                            {
-                                $("#Login-response").html(response.msg);
-                                $("#Login-attempts").html(response.time);
-                            }
-                           else
-                           {
-                            $("#Login-response").html(response.msg);
-                           }
-                            $(".alert button").click(function(e){
-                                e.preventDefault();
-                                $(this).parent().addClass("dnone");
-                            });
-                            if(response.flag=="forgot")
-                            {
-                                $("#forgotpass").removeClass("dnone");
-                            }
-                        }
+                        //     $("#Login-response").html(response.msg);
+                        //     setTimeout(() => {
+                        //     $("#Login-btn").html("Login");
+                        //     url="otp-verify.php?flag=2"+"&email="+response.email;
+                        //     window.location.href=url;
+                        //     },3000);
+                        // }     
+                        // else if(response.status=="failed")
+                        // {   $("#Login-btn").html("Login");
+                        //     if(response.flag=="forgot")
+                        //     {
+                        //         $("#Login-response").html(response.msg);
+                        //         $("#Login-attempts").html(response.attempts);
+                        //     }
+                        //     else if(response.flag=="banned")
+                        //     {
+                        //         $("#Login-response").html(response.msg);
+                        //         $("#Login-attempts").html(response.time);
+                        //     }
+                        //    else
+                        //    {
+                        //     $("#Login-response").html(response.msg);
+                        //    }
+                        //     $(".alert button").click(function(e){
+                        //         e.preventDefault();
+                        //         $(this).parent().addClass("dnone");
+                        //     });
+                        //     if(response.flag=="forgot")
+                        //     {
+                        //         $("#forgotpass").removeClass("dnone");
+                        //     }
+                        // }
                     }           
                     });
                 });
