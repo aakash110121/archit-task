@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2024 at 02:30 PM
+-- Generation Time: Dec 02, 2024 at 10:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -56,7 +56,7 @@ CREATE TABLE `db_user` (
 --
 
 INSERT INTO `db_user` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `deleted`, `isAuthenticated`, `image_path`) VALUES
-(99, 'archit', 'verma', 'archit.avology@gmail.com', '6239763288', '$2y$10$HHsX9a8fwr5rb6K69N3aY.xp3wt9V5KNUm37c/PjOKJzU6b9qjndG', 1, 1, 'assets/uploads/$sign.PNG');
+(107, 'archit', 'verma', 'archit.avology@gmail.com', '6239763288', '$2y$10$t9I7tuIOGu6AFR3l1q9I8erANYjGsDtHyF7JMQjU/jNFdm9gXWZh2', 1, 1, 'assets/uploads/batman.jpg');
 
 -- --------------------------------------------------------
 
@@ -257,7 +257,7 @@ ALTER TABLE `banned_user`
 -- AUTO_INCREMENT for table `db_user`
 --
 ALTER TABLE `db_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `mail_subscribers`
