@@ -73,41 +73,61 @@
             });
         });
         $("#profile-pic").click(function(){
+            console.log("inside button trigger");
             $("#trigger-file").trigger('click');
         });
         $("#trigger-file").on('change',function(){
             $email=$("#email").val();
             var fd=new FormData();
             var files=$("#trigger-file")[0].files[0];
-            console.log(files);
             fd.append("file",files);
             fd.append("action","profile-pic");
             fd.append("email",$email);
               fetch('../includes/action.php',{
                 method:'POST',
                 body:fd,
-              }).then((response)=>response.text()).then((data)=>{
+              }).then((response)=>response.json()).then((data)=>{
                     console.log(data);
+                    if(data.status=="success"){
+                        $("#profile-pic").attr("src","../"+data.file_path);
+                    }
+                    else if(data.status=="failed"){
+                        $("#profile-update").html(data.msg);
+                    }
               })
             });
         $("#edit-profile").on('click',function(){
-            // path=$("#profile-pic").attr("src");
-            // // console.log($img);
-            // email=$("#email").val();
-            // const formdata=new FormData();
-            // formdata.append("email",email);
-            // formdata.append("path",path);
-            // formdata.append("action","editProfile")
-            // fetch('../includes/action.php',{
-            //     method:'POST',
-            //     body:formdata,
-            // }) .then((response)=>response.json()).then((data)=>{
-            //    if(data.status=="success")
-            //    {
-            //         $("#profile-update").html(data.msg);
-            //    }
-            // })
+            var files=$("#trigger-file")[0].files[0];
+            $img_path= $("#profile-pic").attr("src");
+            $email=$("#email").val();
+            console.log($email);
+            fd=new FormData();
+            fd.append("action","Edit_profile");
+            fd.append("path",$img_path);
+            fd.append("email",$email);
+            fetch("../includes/action.php",{
+                method:'POST',
+                body:fd,
+            }).then((response)=>response.json()).then((data)=>{
+                console.log(data);
+                if(data.status=="success")
+                {
+                    console.log(data);
+                    $("#profile_logo").attr("src",$img_path);
+                    $("#profile-update").html(data.msg);
+                    $("#profile-update").removeClass("dnone");
+                    $(".alert").on("click",function(e){
+                        console.log(data.msg);
+                        $("#profile-update").addClass("dnone");
+                    });
+                }
+                else if(data.status=="failed")
+                {
+                    $("#profile-update").html(data.msg);
+                }
+            })
         });
+       
     });
 </script>
 

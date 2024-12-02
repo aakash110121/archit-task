@@ -99,20 +99,9 @@
                         <div class="avatar-content">
                            <a href="#" style="text-decoration:none">
                            <?php
-                                $url=$db->imageUrl($data["email"]);
-                                if($url==NULL)
-                                {
-                            ?>
-                                    <img src="assets/images/dp.png" alt="dp"><span>
-                            <?php
-                                }
-                                else
-                                {
-                                    $url=$url["image_blob"]
-                            ?>
-                                    <img src="<?=$url?>" alt="dp" id="dp-dashboard"><span id="upd-user">
-                            <?php
-                                }
+
+                                    $path=$db->FileExists($data["email"])==NULL?"assets/images/dp.png":$db->FileExists($data["email"]);
+                                    echo"<img src='$path' alt=''>";
                             ?>
                               <span>
                                     <?php

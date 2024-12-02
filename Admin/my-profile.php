@@ -13,28 +13,18 @@
                         <div class="profile-side">
                             <div class="profile-sec">
                                 <div class="user_img">
-                                <div id="profile-update" style="background-image:none;">
+                                <div id="profile-update" >
 
                                 </div>
                                     <div class="update_img_user">
                                         <a href="#" style="text-decoration:none;"> 
                                         <?php
-                                            if($db->FileExists($email)==NULL)
-                                            {
-                                        ?>
-                                                <img src="../assets/images/dp.png" alt="">
-                                        <?php
-                                            }
-                                            else
-                                            {
-                                                
-                                        ?>
-                                                 <img src="" alt="">
-                                        <?php
-                                            }
+                                            
+                                            $path=$db->FileExists($data["email"])==NULL?"../assets/images/dp.png":"../".$db->FileExists($data["email"]);
+                                            echo"<img src='$path' id ='profile-pic' alt='invalid_image'>";
                                         ?>
                                         <span class="edit_pan"><i class="fa-solid fa-pen" style="color:black"></i> </span></a>
-                                        <form enctype="multipart/form-data" id="profile-pic">
+                                        <form enctype="multipart/form-data" >
                                             <input type="hidden" name="email" value="<?=$data["email"]?>" id="email">
                                             <input type="file" class="dnone" name="file" id="trigger-file">
                                         </form>  

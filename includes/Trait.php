@@ -138,13 +138,16 @@
         $sql="UPDATE db_user SET image_path=:path WHERE email=:email";
         $stmt=$this->conn->prepare($sql);
         $stmt->execute(["path"=>$path,"email"=>$email]);
+        return true;
     }
     public function FileExists($email)
     {
         $sql="SELECT image_path FROM db_user WHERE email=:email";
         $stmt=$this->conn->prepare($sql);
-        $res=$stmt->execute(["email"=>$email]);
-        return $res;
+        $stmt->execute(["email"=>$email]);
+        $res=$stmt->fetch(PDO::FETCH_ASSOC);
+        return($res["image_path"]);
+
     }
   }
 

@@ -89,9 +89,13 @@
                     <div class="profile">
                         <div class="avatar">
                             <div class="avatar-content">
-                            <a href="#">
-                            
-                                    <img src="assets/images/dp.png" alt="dp"><span>
+                            <a href="# " style="text-decoration:none;color:#222">
+
+                            <?php
+
+                                    $path=$db->FileExists($data["email"])==NULL?"assets/images/dp.png":$db->FileExists($data["email"]);
+                                    echo"<img src='$path' alt=''>";
+                            ?>
                           
                                         <?php
                                            
