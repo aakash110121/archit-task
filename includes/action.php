@@ -47,7 +47,7 @@
         }
         else if ($_POST["action"] == "profile-pic"){
                 
-            require "profile-pic.php";
+            require_once "profile-pic.php";
         }
         else if($_POST["action"]=="Edit_profile"){
             require "Edit_profile.php";

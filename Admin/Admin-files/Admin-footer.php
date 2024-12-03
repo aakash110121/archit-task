@@ -87,7 +87,7 @@
                 method:'POST',
                 body:fd,
               }).then((response)=>response.json()).then((data)=>{
-                    console.log(data);
+                    // console.log(data);
                     if(data.status=="success"){
                         $("#profile-pic").attr("src","../"+data.file_path);
                     }

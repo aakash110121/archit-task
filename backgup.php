@@ -32,30 +32,29 @@
                         // echo $row[0]."           ";
                         if(preg_match("/\((\d+)\)\.(jpg|jpeg|png|PNG|JPEG|JPG)$/",pathinfo($file_name,PATHINFO_FILENAME)))
                         {
-                            $pattern='/\((\d+)\)\.(jpg|jpeg|png|PNG|JPEG|JPG)$/';
-                            $res=preg_split($pattern,$values);
-                            print_r($res);
-                            if($res[0]==pathinfo($file_name,PATHINFO_FILENAME))
+                            foreach($arr as $index=>$values)
                             {
-                                $count++;
+                                $sub=explode(".",$arr);
+                                if($sub[0]==pathinfo($file_name,PATHINFO_FILENAME))
+                                {
+                                    $count++;
+                                }
                             }
-                            $is_exists=true;
                         }
                         else
                         {
-                            
-                                foreach($arr as $index=>$values)
+                            foreach($arr as $index=>$values)
+                            {
+                                $pattern='/\((\d+)\)\.(jpg|jpeg|png|PNG|JPEG|JPG)$/';
+                                $res=preg_split($pattern,$values);
+                                print_r($res);
+                                if($res[0]==pathinfo($file_name,PATHINFO_FILENAME))
                                 {
-                                    $pattern='/\((\d+)\)\.(jpg|jpeg|png|PNG|JPEG|JPG)$/';
-                                    $res=preg_split($pattern,$values);
-                                    if($res[0]==pathinfo($file_name,PATHINFO_FILENAME))
-                                    {
-                                        $count++;
-                                    }
-                                    $is_exists=true;
+                                    $count++;
                                 }
+                            }
                         } 
-                        
+                        $is_exists=true;
                     }
                   
                     if($is_exists==true)
@@ -75,14 +74,15 @@
             {    $result=scan();
                 if($result==true)
                 {
-                    $file=$dir_name.pathinfo($file_name,PATHINFO_FILENAME)."(".$count.")".".".pathinfo($file_name,PATHINFO_EXTENSION);
+                    $file="../".$dir_name.pathinfo($file_name,PATHINFO_FILENAME)."(".$count.")".".".pathinfo($file_name,PATHINFO_EXTENSION);
                 }
                 else
                 {
-                    $file=$dir_name.$file_name;
+                    $file="../".$dir_name.$file_name;
                 }
-                move_uploaded_file($_FILES["file"]["tmp_name"],"../".$file);
-                $arr=["status"=>"success","file_path"=>$file];
+                move_uploaded_file($_FILES["file"]["tmp_name"],$file);
+                $file_path=$dir_name.$file_name;
+                $arr=["status"=>"success","file_path"=>$file_path];
                 $res=json_encode($arr);
                 echo $res;
             }
@@ -100,14 +100,15 @@
                 {    $result=scan();
                     if($result==true)
                     {
-                        $file=$dir_name.pathinfo($file_name,PATHINFO_FILENAME)."(".$count.")".pathinfo($file_name,PATHINFO_EXTENSION);
+                        $file="../".$dir_name.pathinfo($file_name,PATHINFO_FILENAME)."(".$count.")".pathinfo($file_name,PATHINFO_EXTENSION);
                     }
                     else
                     {
-                        $file=$dir_name.$file_name;
+                        $file="../".$dir_name.$file_name;
                     }
                     move_uploaded_file($_FILES["file"]["tmp_name"],"../".$file);
-                    $arr=["status"=>"success","file_path"=>$file];
+                    $file_path=$dir_name.$file_name;
+                    $arr=["status"=>"success","file_path"=>$file_path];
                     $res=json_encode($arr);
                     echo $res;
                 }
