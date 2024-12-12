@@ -1,0 +1,14 @@
+RewriteEngine on
+
+# Block access to /assets/ and its subdirectories
+RewriteCond %{REQUEST_URI} ^/assets(/.*)?$ [NC]
+RewriteRule ^(.*)$ - [F,L]
+
+# Redirect  to /artists/public/index.html
+RewriteCond %{REQUEST_URI} ^(\/[a-zA-Z]+\/)$ [NC]
+RewriteRule ^(.*)$ /artists/public/index.html [L]
+
+
+ 
+
+

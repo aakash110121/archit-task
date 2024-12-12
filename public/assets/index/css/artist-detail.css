@@ -1,0 +1,89 @@
+.artist__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.artist__biography h2 {
+    color: #000;
+    font-size: 36px;
+    font-family: 'Montserrat';
+}
+
+.artist__biography p {
+    font-size: 18px;
+    line-height: 30px;
+    font-family: 'Montserrat';
+}
+
+.artist__biography.detail {
+    padding: 50px 0;
+}
+
+section.Artist-biography {
+    padding: 50px 0;
+}
+
+.artist__biography.detail h2 {
+    color: #000;
+    font-size: 40px;
+    font-family: 'Montserrat';
+}
+
+.artist__biography.detail p {
+    font-size: 18px;
+    line-height: 30px;
+    font-family: 'Montserrat';
+}
+
+.artist__banner {
+    background-image: url(../images/detailbg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 450px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.artist__part h2 {
+    font-size: 40px;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Montserrat';
+}
+.artist__picture img {
+    height: 450px;
+    object-fit: cover;
+    object-position: 100% 12%;
+}
+.brands-title h2 {
+    color: #000;
+    font-size: 40px;
+    font-family: 'Montserrat';
+}
+
+section.brands-product {
+    padding-bottom: 50px;
+}
+
+.brands-product button.owl-next::before {
+    content: '';
+    position: absolute;
+    background: url(../images/popular-right.png)no-repeat;
+    width: 15px;
+    height: 20px;
+    right: 0px !important;
+    top: -30px !important;
+    display: none;
+}
+
+.brands-title h2 {
+    margin-bottom: 40px;
+}

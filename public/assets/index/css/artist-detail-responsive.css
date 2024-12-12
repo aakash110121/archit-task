@@ -1,0 +1,57 @@
+@media screen and (max-width:992px) {
+    section.Artist-biography {
+        padding: 50px 0 0 0;
+    }
+
+    .artist__biography h2 {
+        font-size: 40px;
+    }
+
+    .artist__biography p {
+        font-size: 16px;
+        line-height: 27px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .artist__biography p {
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .artist__biography h2 {
+        font-size: 25px;
+    }
+
+    .artist__biography.detail p {
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .artist__biography.detail h2 {
+        font-size: 25px;
+    }
+
+    .artist__biography.detail {
+        padding: 5px 0;
+    }
+
+    .brands-title h2 {
+        margin-bottom: 40px;
+        margin-top: 40px;
+    }
+
+    .artist__banner {
+        height: 450px;
+    }
+}
+
+@media screen and (max-width:575px) {
+    .artist__content {
+        padding: 30px 0 0 0;
+    }
+
+    .brands-title h2 {
+        font-size: 33px;
+    }
+}

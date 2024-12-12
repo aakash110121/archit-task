@@ -1,0 +1,77 @@
+
+@media only screen and (max-width: 1479px) {
+.popular__flex {
+  gap: 28px;
+}
+
+.dress-in {
+  padding: 0;
+}
+
+.popular-btn a {
+  padding: 9px 9px !important;
+}
+
+.popular__flex {
+  gap: 15px;
+}
+}
+
+@media only screen and (max-width: 1300PX) {
+.Products .pop_artis-wrapper {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  padding: 30px 0;
+}
+}
+
+
+@media only screen and (max-width: 1024px) {
+.popular-btn a {
+  font-size: 10px;
+  padding: 9px 5px;
+}
+}
+@media only screen and (max-width: 991px) {
+.Products .pop_artis-wrapper {
+	gap: 40px;
+  }
+
+  .popular__flex {
+	justify-content: space-between;
+  }
+}
+@media only screen and (max-width: 999px) {
+.Products .artist-identy {
+width: 50% !important;
+}
+.Products .prodct_cart {
+width: 50% !important;
+}
+}
+
+@media only screen and (max-width: 768px) {
+.Products .pop_artis-wrapper .artist-card{
+height: 417px !important;
+}
+}
+   @media only screen and (max-width: 575px) {
+.Products .pop_artis-wrapper {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.Products .artist-identy {
+width: 100% !important;
+}
+.Products .prodct_cart {
+width: 100% !important;
+}
+.prodct_cart .owl-nav {
+transform: translate(-50%, 50%);
+position: absolute;
+top: -8%;
+right: 0;
+}
+   }

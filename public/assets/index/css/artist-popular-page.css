@@ -1,0 +1,117 @@
+.pop_artis-wrapper {
+display: flex;
+gap: 65px;
+align-items: center;
+padding: 30px 0;
+}
+
+.pop_artis-wrapper .artist-card {
+height: 469px;
+}
+
+section.Products {
+padding: 30px 0;
+}
+
+.artist-card {
+text-align: center;
+border-width: 2px;
+border-style: solid;
+border-color: rgb(0, 0, 0);
+border-image: initial;
+background: rgb(255, 255, 255);
+padding: 47px 16px 35px;
+}
+
+.artist-card h5 {
+color: rgb(0, 0, 0);
+text-align: center;
+font-family: Montserrat;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: 22px;
+margin-top: 34px;
+}
+button.owl-next:focus-visible {
+outline: transparent;
+}
+.artist-card p {
+color: rgb(0, 0, 0);
+text-align: center;
+font-family: Montserrat;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px;
+max-width: 216px;
+margin: 0 auto;
+}
+
+.artist-card img {
+max-width: 129px;
+margin: 0px auto;
+}
+
+.popular__flex {
+display: flex;
+gap: 40px;
+align-items: center;
+}
+
+.popular-btn a {
+color: #000;
+font-family: Montserrat;
+font-size: 12px;
+font-style: normal;
+font-weight: 600;
+line-height: 24px;
+border: 1px solid #000;
+background: #FFF;
+padding: 9px 10px;
+}
+
+button.owl-prev::before {
+content: '';
+position: absolute;
+top: 0;
+background: url(../images/popular-left.png)no-repeat;
+width: 15px;
+height: 20px;
+left: -58px;
+}
+
+button.owl-next::before {
+content: '';
+position: absolute;
+top: 0;
+background: url(../images/popular-right.png)no-repeat;
+width: 15px;
+height: 20px;
+left: 0px;
+}
+
+.Product__title h2 {
+font-size: 34px;
+font-weight: bold;
+}
+
+.prodct_cart {
+width: 70% !important;
+}
+
+
+.prodct_cart .owl-nav {
+transform: translate(-50%, 50%);
+position: absolute;
+top: -19%;
+right: 0;
+}
+
+.products-artist {
+margin: 0 15px;
+}
+
+.artist-identy {
+width: 22.5% !important;
+}
